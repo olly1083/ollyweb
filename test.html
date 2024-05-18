@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #messageBoard {
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+        .message {
+            border-bottom: 1px solid #eee;
+            padding: 5px 0;
+        }
+        .username {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Message Board</h1>
+
+<div id="messageBoard"></div>
+
+<form id="messageForm">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="4" required></textarea><br><br>
+    <button type="submit">Post Message</button>
+</form>
+
+<script>
+    document.getElementById('messageForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const message = document.getElementById('message').value;
+
+        if (username && message) {
+            const messageBoard = document.getElementById('messageBoard');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+
+            const usernameSpan = document.createElement('span');
+            usernameSpan.className = 'username';
+            usernameSpan.textContent = username + ': ';
+
+            const messageSpan = document.createElement('span');
+            messageSpan.textContent = message;
+
+            messageDiv.appendChild(usernameSpan);
+            messageDiv.appendChild(messageSpan);
+
+            messageBoard.appendChild(messageDiv);
+
+            // Clear the input fields
+            document.getElementById('username').value = '';
+            document.getElementById('message').value = '';
+        }
+    });
+</script>
+
+</body>
+</html>
